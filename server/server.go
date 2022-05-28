@@ -23,12 +23,22 @@ func main() {
 		log.Fatalln("Errored while Listen to : ", socket, err)
 	}
 	s := grpc.NewServer()
-	sgRPC.RegisterSimpleServiceServer(s, &Server{})
+	sgRPC.RegisterSimpleServiceServer(s, &Server{}) // registering our grpc server with our grpc service.
 	err = s.Serve(lisn)
 	if err != nil {
 		log.Fatalln("Errored while Serving : ", socket, err)
 	}
 }
+
+// Implementing all these rpc methods defined in the Proto file.
+// These Methods Signatures are found in the compiled output of the Proto file.
+
+// type SimpleServiceClient interface {
+// 	RPCRequest(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
+// 	ServerStreaming(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (SimpleService_ServerStreamingClient, error)
+// 	ClientStreaming(ctx context.Context, opts ...grpc.CallOption) (SimpleService_ClientStreamingClient, error)
+// 	StreamingBiDirectional(ctx context.Context, opts ...grpc.CallOption) (SimpleService_StreamingBiDirectionalClient, error)
+// }
 
 func (s *Server) RPCRequest(ctx context.Context, req *sgRPC.SimpleRequest) (*sgRPC.SimpleResponse, error) {
 	log.Println("Unary request")
@@ -56,7 +66,6 @@ func (s *Server) ClientStreaming(stream sgRPC.SimpleService_ClientStreamingServe
 	return nil
 }
 
-// for this 2 function give neat log
 func (s *Server) ServerStreaming(req *sgRPC.SimpleRequest, stream sgRPC.SimpleService_ServerStreamingServer) error {
 	log.Println("ServerStreaming RPC")
 	log.Printf("Request- %v", req)

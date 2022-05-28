@@ -15,13 +15,14 @@ const socket string = "127.0.0.1:8081"
 
 func main() {
 	// grpc uses HTTP 2 which is by default uses SSL
+	// we use insecure (we can also use the credentials)
 	conn, err := grpc.Dial(socket, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalln("Could not connect to : ", socket)
 	}
 	log.Println("Connected to ", socket)
 	defer conn.Close()
-	client := sgRPC.NewSimpleServiceClient(conn)
+	client := sgRPC.NewSimpleServiceClient(conn) // Using this connection to use the SimpleService
 	// unary request
 	makeUnaryRequest(client)
 
