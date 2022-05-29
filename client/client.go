@@ -11,7 +11,9 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-const socket string = "127.0.0.1:8081"
+const socket string = "localhost:8090"
+
+// const socket string = "192.168.234.128:80"
 
 func main() {
 	// grpc uses HTTP 2 which is by default uses SSL

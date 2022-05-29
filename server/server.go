@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-const socket string = "127.0.0.1:8081"
+const socket string = "localhost:8090"
 
 type Server struct {
 	sgRPC.SimpleServiceServer
@@ -22,6 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("Errored while Listen to : ", socket, err)
 	}
+	log.Println("Listening at ", socket)
 	s := grpc.NewServer()
 	sgRPC.RegisterSimpleServiceServer(s, &Server{}) // registering our grpc server with our grpc service.
 	err = s.Serve(lisn)
