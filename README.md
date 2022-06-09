@@ -1,7 +1,7 @@
 ## four_gRPC_modes
-Contains the gRPC Client and Sever codes for the four types of gRPC communications.
+Contains the gRPC Client and Sever codes in Golang for the four types of gRPC communications.
 
-The gRPC Services used in this repo is defined in the this [repo](https://github.com/LogeshVel/simple_gRPC)
+The gRPC Services used in this repo is defined in the [simple gRPC](https://github.com/LogeshVel/simple_gRPC) repo
 
 
 #### Usage:
