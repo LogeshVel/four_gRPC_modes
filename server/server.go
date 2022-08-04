@@ -44,7 +44,8 @@ func main() {
 func (s *Server) RPCRequest(ctx context.Context, req *sgRPC.SimpleRequest) (*sgRPC.SimpleResponse, error) {
 	log.Println("Unary request")
 	log.Printf("Request - %v\n", req)
-	response := &sgRPC.SimpleResponse{Response: "Here is your response"}
+	r := fmt.Sprintf("Here is your response for the request msg %v", req.RequestNeed)
+	response := &sgRPC.SimpleResponse{Response: r}
 	log.Printf("Response - %v\n", response)
 	return response, nil
 }
@@ -54,7 +55,7 @@ func (s *Server) ClientStreaming(stream sgRPC.SimpleService_ClientStreamingServe
 	for {
 		req, err := stream.Recv()
 		if err == io.EOF {
-			response := &sgRPC.SimpleResponse{Response: "Here is your response"}
+			response := &sgRPC.SimpleResponse{Response: "Here is your Client Streaming response"}
 			log.Printf("Response - %v\n", response)
 			stream.SendAndClose(response)
 			break

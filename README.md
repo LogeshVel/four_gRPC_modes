@@ -6,4 +6,17 @@ The gRPC Services used in this repo is defined in the [simple gRPC](https://gith
 
 #### Usage:
   
-  First start the Server then run the client.
+Clone the repo
+
+Run the below command in the Projects root dir path
+
+```go mod tidy```
+
+
+```go
+go run server/server.go
+```
+
+```go
+go run client/client.go
+```
